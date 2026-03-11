@@ -1,0 +1,21 @@
+[variables]
+main_domain = "${domain}"
+pihole_password = "${password:16}"
+
+[config]
+env = [
+  "TZ=Europe/London",
+  "FTLCONF_webserver_api_password=${pihole_password}"
+]
+
+[[config.domains]]
+serviceName = "pihole"
+port = 80
+host = "${main_domain}"
+
+[[config.mounts]]
+filePath = "/etc/pihole/custom.list"
+content = """
+# Custom DNS records
+# Format: IP_ADDRESS   DOMAIN_NAME
+"""
